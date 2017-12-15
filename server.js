@@ -17,6 +17,8 @@ TOKEN = process.env.TOKEN || 'bda98695-b53e-4a63-a9c5-8b115ba6539c';
 
 app.get(`/${TOKEN}`, (req, res) => res.send('Simple Web Server!'));
 
+app.enable('trust proxy');
+
 app.use((req, res, next) => {
     res.set('Content-Type', 'text/plain');
     next()
