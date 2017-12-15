@@ -1,0 +1,13 @@
+{
+  "name": "simple-webhook",
+  "version": "1.0.0",
+  "description": "Simple webhook handler",
+  "main": "server.js",
+  "author": "Jan Stastny",
+  "license": "MIT",
+  "private": true,
+  "dependencies": {
+    "express": "^4.16.2",
+    "json-format": "^1.0.1"
+  }
+}
