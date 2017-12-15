@@ -45,6 +45,10 @@ app.get(`/${TOKEN}/:bucket_name`, (req, res, next) => {
             res.write("\n");
             res.write("Sample curl call:");
             res.write("\n");
+            const full_url = req.protocol + '://' + req.get('host') + '/' + TOKEN + '/' + req.params['bucket_name'];
+            res.write(`curl -X POST -H "Content-Type: application/json" --data '{"hello": "world"}' ${full_url}`);
+            res.write("\n");
+
             res.end()
         }
 
