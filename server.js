@@ -92,6 +92,7 @@ app.post(`/${TOKEN}/:bucket_name`, jsonParser, (req, res, next) => {
             console.error("Failed to write to file: " + file_path + ". Content: " + content);
             return next(err)
         }
+        console.log("Successfully recorded request for bucket: " + req.params['bucket_name']);
 
         res.send('Accepted');
     });
