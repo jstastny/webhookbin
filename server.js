@@ -75,7 +75,6 @@ app.post(`/${TOKEN}/:bucket_name`, jsonParser, (req, res, next) => {
             .send("Invalid request. Only application/json requests are supported. " +
                 "Make sure, you are setting Content-Type header correctly.");
     }
-    console.log(req.body);
     const bucket_dir = path.join(DATA_DIR, req.params['bucket_name']);
     if (!fs.existsSync(bucket_dir)) {
         fs.mkdirSync(bucket_dir);
@@ -98,4 +97,4 @@ app.use((req, res, next) =>
     res.status(404).send("Page not found. Maybe invalid token?")
 );
 
-app.listen(PORT, () => console.log(`Example app listening on port ${PORT}!`));
+app.listen(PORT, () => console.log(`Webhook bin listening on port ${PORT}!`));
