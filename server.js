@@ -25,7 +25,7 @@ app.use((req, res, next) => {
 app.use(`/${TOKEN}/:bucket_name`, (req, res, next) => {
     if (!req.params['bucket_name'].match(/^[A-Za-z0-9_-]+$/)) {
         console.error("Invalid bucket name: " + req.params['bucket_name']);
-        return res.status(400).send('Invalid bucket name.');
+        return res.status(400).send('Invalid bucket name. Please use only letters, numbers, underscore and dash.');
     }
     next()
 });
