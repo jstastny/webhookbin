@@ -40,7 +40,12 @@ app.get(`/${TOKEN}/:bucket_id`, (req, res, next) => {
         fs.readdir(bucket_dir, (err, files) => {
             if (err) return next(err);
 
-            files.sort().reverse().slice(0, 100).forEach((filename, idx, array) => {
+            const files_subset = files.sort().reverse().slice(0, 100);
+            if (files_subset.length === 0) {
+                res.send("No requests in this bucket yet. Send POST request to this URL and check again.")
+            }
+
+            files_subset.forEach((filename, idx, array) => {
                 fs.readFile(path.join(bucket_dir, filename), (err, content) => {
                     res.write("============ " + filename + " ============");
                     res.write("\n");
