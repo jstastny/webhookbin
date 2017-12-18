@@ -4,6 +4,9 @@ const os = require('os');
 const path = require('path');
 const bodyParser = require('body-parser');
 const _ = require('lodash/core');
+const {promisify} = require('util');
+
+const readFileAsync = promisify(fs.readFile); // (A)
 
 const DATA_DIR = os.tmpdir();
 
@@ -54,8 +57,8 @@ app.get(`/${TOKEN}/:bucket_name`, (req, res, next) => {
             res.end()
         }
 
-        files_subset.forEach((filename, idx, array) => {
-            fs.readFile(path.join(bucket_dir, filename), (err, content) => {
+        Promise.all(files_subset.map((filename) => {
+            return readFileAsync(path.join(bucket_dir, filename)).then((content) => {
                 res.write("============ " + filename + " ============");
                 res.write("\n");
 
@@ -65,12 +68,8 @@ app.get(`/${TOKEN}/:bucket_name`, (req, res, next) => {
                 res.write("=======================================================");
                 res.write("\n");
                 res.write("\n");
-
-                if (idx === array.length - 1) {
-                    res.end()
-                }
             });
-        });
+        })).then(() => res.end());
     });
 });
 

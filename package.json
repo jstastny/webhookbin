@@ -6,6 +6,9 @@
   "author": "Jan Stastny",
   "license": "MIT",
   "private": true,
+  "engines": {
+    "node": "8.9.1"
+  },
   "dependencies": {
     "express": "^4.16.2",
     "lodash": "^4.17.4"
