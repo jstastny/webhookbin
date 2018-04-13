@@ -59,17 +59,17 @@ app.get(`/${TOKEN}/:bucket_name`, (req, res, next) => {
 
         Promise.all(files_subset.map((filename) => {
             return readFileAsync(path.join(bucket_dir, filename)).then((content) => {
-                res.write("============ " + filename + " ============");
-                res.write("\n");
-
-                res.write(content);
-                res.write("\n");
-
-                res.write("=======================================================");
-                res.write("\n");
-                res.write("\n");
+                return [
+                    "============ " + filename + " ============",
+                    content,
+                    "=======================================================",
+                    "\n"
+                ].join("\n");
             });
-        })).then(() => res.end());
+        })).then((webhookLogs) => {
+            webhookLogs.forEach((log) => res.write(log));
+            res.end()
+        });
     });
 });
 
