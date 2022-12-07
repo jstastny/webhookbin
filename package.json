@@ -10,7 +10,7 @@
     "node": "8.9.1"
   },
   "dependencies": {
-    "express": "^4.16.2",
+    "express": "^4.17.3",
     "lodash": "^4.17.19"
   }
 }
